@@ -2321,7 +2321,7 @@ export const Tasks = (
                                           {isEditingRecur ? (
                                             <div className="flex items-center gap-2">
                                               <Select
-                                                value={editedRecur || ''}
+                                                value={editedRecur || 'none'}
                                                 onValueChange={(value) =>
                                                   setEditedRecur(value)
                                                 }
@@ -2330,6 +2330,12 @@ export const Tasks = (
                                                   <SelectValue placeholder="Select recurrence" />
                                                 </SelectTrigger>
                                                 <SelectContent>
+                                                  <SelectItem
+                                                    value="none"
+                                                    className="cursor-pointer hover:bg-accent"
+                                                  >
+                                                    None
+                                                  </SelectItem>
                                                   <SelectItem
                                                     value="daily"
                                                     className="cursor-pointer hover:bg-accent"
@@ -2386,7 +2392,7 @@ export const Tasks = (
                                                 onClick={() => {
                                                   setIsEditingRecur(true);
                                                   setEditedRecur(
-                                                    task.recur || ''
+                                                    task.recur || 'none'
                                                   );
                                                 }}
                                               >

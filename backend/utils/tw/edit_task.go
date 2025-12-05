@@ -113,7 +113,11 @@ func EditTaskInTaskwarrior(uuid, description, email, encryptionSecret, taskID st
 	}
 
 	// Handle recur - this will automatically set rtype field
-	if recur != "" {
+	if recur == "none" {
+		if err := utils.ExecCommand("task", "rc.recurrence.confirmation=no", taskID, "modify", "recur:"); err != nil {
+			fmt.Printf("Note: Could not remove recur: %v\n", err)
+		}
+	} else if recur != "" {
 		if err := utils.ExecCommand("task", taskID, "modify", "recur:"+recur); err != nil {
 			return fmt.Errorf("failed to set recur %s: %v", recur, err)
 		}
